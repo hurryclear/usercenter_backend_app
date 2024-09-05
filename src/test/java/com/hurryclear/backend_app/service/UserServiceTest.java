@@ -34,4 +34,44 @@ public class UserServiceTest {
         System.out.println(user.getId());
         Assertions.assertTrue(result);
     }
+
+    // how to write unit test? how to debug?
+    @Test
+    void userRegister() {
+
+        String userAccount = "hurryclear";
+        String checkPassword = "123456";
+        // test not empty
+        String userPassword = "";
+        long result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // test username not shorter than 4
+        userAccount = "hh";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // test password is not shorter than 8
+        userAccount = "hurryclear";
+        userPassword = "123456";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // test no special ziffer
+        userAccount = "hurry clear";
+        userPassword = "12345678";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // test password and check password are same
+        checkPassword = "123456789";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // test no two same user accounts
+        userAccount = "hurryclear1";
+        checkPassword = "12345678";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+        // test the successful registration
+        userAccount = "hurryclear";
+        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Assertions.assertEquals(-1, result);
+
+    }
 }

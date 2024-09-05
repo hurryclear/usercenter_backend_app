@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
 
         // 1.2 username is not allowed to include special ziffer
-        String validPattern = "\\pP|\\pS|\\s+";
+        String validPattern = "[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         Matcher matcher = Pattern.compile(validPattern).matcher(userAccount);
         if  (!matcher.find()) {
             return -1;
@@ -69,7 +69,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
 
         // 2. password encrypt
-        final String SALT = "hurryclear";
+        final String SALT = "hurry";
         String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
 
         // 3. save new user into database

@@ -1,8 +1,10 @@
 package com.hurryclear.backend_app.controller;
 
+import com.hurryclear.backend_app.model.domain.User;
 import com.hurryclear.backend_app.model.domain.request.UserRegisterRequest;
 import com.hurryclear.backend_app.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +37,24 @@ public class UserController {
         }
 
         return userService.userRegister(userAccount, userPassword, checkPassword);
+
+    }
+
+    @PostMapping("/login")
+    public User userRegister(@RequestBody UserRegisterRequest userLoginRequest, HttpServletRequest request) {
+
+        if (userLoginRequest == null) {
+            return null;
+        }
+
+        String userAccount = userLoginRequest.getUserAccount();
+        String userPassword = userLoginRequest.getUserPassword();
+
+        if (StringUtils.isAnyBlank(userAccount, userPassword)) {
+            return null;
+        }
+
+        return userService.userLogin(userAccount, userPassword, request);
 
     }
 }

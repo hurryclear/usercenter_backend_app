@@ -13,3 +13,8 @@ server:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: false
+  global-config:
+    db-config: # logic delete using "isDelete" column, why do we need this?
+      logic-delete-field: isDelete # logic delete global variable
+      logic-delete-value: 1 # logic delete: yes
+      logic-not-delete-value: 0 # logic delete: no

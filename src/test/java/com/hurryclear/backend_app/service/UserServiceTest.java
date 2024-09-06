@@ -70,7 +70,7 @@ public class UserServiceTest {
         Assertions.assertEquals(-1, result);
         // test the successful registration
         userAccount = "hurjiang";
-        userPassword = "hurjiang";
+        userPassword = "12345678";
         result = userService.userRegister(userAccount, userPassword, checkPassword);
         Assertions.assertTrue(result > 0);
 

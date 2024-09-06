@@ -69,9 +69,10 @@ public class UserServiceTest {
         result = userService.userRegister(userAccount, userPassword, checkPassword);
         Assertions.assertEquals(-1, result);
         // test the successful registration
-        userAccount = "hurryclear";
+        userAccount = "hurjiang";
+        userPassword = "hurjiang";
         result = userService.userRegister(userAccount, userPassword, checkPassword);
-        Assertions.assertEquals(-1, result);
+        Assertions.assertTrue(result > 0);
 
     }
 }

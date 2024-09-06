@@ -58,7 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 1.2 username is not allowed to include special ziffer
         String validPattern = "[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         Matcher matcher = Pattern.compile(validPattern).matcher(userAccount);
-        if  (!matcher.find()) {
+        if  (matcher.find()) {
             return -1;
         }
 
@@ -113,7 +113,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 1.2 username is not allowed to include special ziffer
         String validPattern = "[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         Matcher matcher = Pattern.compile(validPattern).matcher(userAccount);
-        if  (!matcher.find()) {
+        if  (matcher.find()) {
             return null;
         }
 

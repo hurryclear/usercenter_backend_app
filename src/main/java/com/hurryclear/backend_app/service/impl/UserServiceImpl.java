@@ -6,12 +6,12 @@ import com.hurryclear.backend_app.model.domain.User;
 import com.hurryclear.backend_app.service.UserService;
 import com.hurryclear.backend_app.mapper.UserMapper;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.context.request.NativeWebRequest;
 
-import javax.swing.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,11 +23,19 @@ import java.util.regex.Pattern;
 * @createDate 2024-08-30 18:23:02
 */
 @Service
+@Slf4j // log?
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
 
     @Resource
     private UserMapper userMapper; // insert mapper ?? service call mapper
+
+    private static final String SALT = "hryclr";
+
+    /**
+     * key of user login's status
+     */
+    private static final String USER_LOGIN_STATE = "userLoginState";
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
@@ -69,7 +77,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
 
         // 2. password encrypt
-        final String SALT = "hurry";
         String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
 
         // 3. save new user into database
@@ -83,8 +90,63 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return user.getId();
 
     }
+
+    @Override
+    public User userLogin(String userAccount, String userPassword, HttpServletRequest request) {
+
+        // 1. check the validation of username and user_password
+
+        // 1.1 no empty user account/password/check_password
+        if (StringUtils.isAnyBlank(userAccount, userPassword)) {
+            return null;
+        }
+        // account is not shorter than 4
+        if(userAccount.length() < 4) {
+            return null;
+        }
+
+        // password is not shorter than 8
+        if(userPassword.length() < 8) {
+            return null;
+        }
+
+        // 1.2 username is not allowed to include special ziffer
+        String validPattern = "[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+        Matcher matcher = Pattern.compile(validPattern).matcher(userAccount);
+        if  (!matcher.find()) {
+            return null;
+        }
+
+        // 2. password encrypt
+        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
+
+        // 3. search the account with the password in database to if there is such a user
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("userAccount", userAccount);
+        queryWrapper.eq("userPassword", encryptPassword);
+        User user = userMapper.selectOne(queryWrapper); // ???
+        // if there is no such a user
+        if(user == null) {
+            log.info("user login failed, userAccount cannot match userPassword"); // what is log? why do I need this?
+            return null;
+        }
+
+        // 4. get rid of the sensitive information of user
+        User safetyUser = new User();
+        safetyUser.setId(user.getId());
+        safetyUser.setUsername(user.getUsername());
+        safetyUser.setUserAccount(user.getUserAccount());
+        safetyUser.setAvatarUrl(user.getAvatarUrl());
+        safetyUser.setGender(user.getGender());
+        safetyUser.setPhone(user.getPhone());
+        safetyUser.setEmail(user.getEmail());
+        safetyUser.setUserStatus(user.getUserStatus());
+        safetyUser.setCreateTime(user.getCreateTime());
+
+        // 5. record user's status of login
+        request.getSession().setAttribute(USER_LOGIN_STATE, safetyUser); // ???
+
+        return safetyUser;
+    }
 }
-
-
-
 

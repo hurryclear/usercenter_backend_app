@@ -2,6 +2,7 @@ package com.hurryclear.backend_app.service;
 
 import com.hurryclear.backend_app.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
 * @author hurryclear
@@ -19,4 +20,15 @@ public interface UserService extends IService<User> {
      * @return user_Id
      */
     long userRegister(String userAccount, String userPassword, String checkPassword);
+
+    /**
+     * user login
+     *
+     * @param userAccount
+     * @param userPassword
+     * @param request
+     * @return user info without sensitiv info
+     */
+    User userLogin(String userAccount, String userPassword, HttpServletRequest request);
+    // what is HttpServletRequest request?
 }

@@ -144,6 +144,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         safetyUser.setCreateTime(user.getCreateTime());
 
         // 5. record user's status of login
+        // after successful login: a hashmap will be put into attributes under session (use debug can easily see this)
+        // but i'm not sure about the purpose
         request.getSession().setAttribute(USER_LOGIN_STATE, safetyUser); // ???
 
         return safetyUser;

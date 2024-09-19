@@ -15,6 +15,9 @@ import org.springframework.util.DigestUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.hurryclear.backend_app.constant.UserConstant.USER_LOGIN_STATE;
+import static net.sf.jsqlparser.util.validation.metadata.NamedObject.user;
+
 /**
  *
  * user service implement class, all write the main functional code here
@@ -32,10 +35,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     private static final String SALT = "hryclr";
 
-    /**
-     * key of user login's status
-     */
-    private static final String USER_LOGIN_STATE = "userLoginState";
+
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
@@ -132,16 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
 
         // 4. get rid of the sensitive information of user
-        User safetyUser = new User();
-        safetyUser.setId(user.getId());
-        safetyUser.setUsername(user.getUsername());
-        safetyUser.setUserAccount(user.getUserAccount());
-        safetyUser.setAvatarUrl(user.getAvatarUrl());
-        safetyUser.setGender(user.getGender());
-        safetyUser.setPhone(user.getPhone());
-        safetyUser.setEmail(user.getEmail());
-        safetyUser.setUserStatus(user.getUserStatus());
-        safetyUser.setCreateTime(user.getCreateTime());
+        User safetyUser = getSafetyUser(user);
 
         // 5. record user's status of login
         // after successful login: a hashmap will be put into attributes under session (use debug can easily see this)
@@ -150,5 +141,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         return safetyUser;
     }
+
+
+    /**
+     * get rid of the sensitive information of user
+     * @param originUser
+     * @return
+     */
+    @Override
+    public User getSafetyUser(User originUser) {
+        User safetyUser = new User();
+        safetyUser.setId(originUser.getId());
+        safetyUser.setUsername(originUser.getUsername());
+        safetyUser.setUserAccount(originUser.getUserAccount());
+        safetyUser.setAvatarUrl(originUser.getAvatarUrl());
+        safetyUser.setGender(originUser.getGender());
+        safetyUser.setPhone(originUser.getPhone());
+        safetyUser.setEmail(originUser.getEmail());
+        safetyUser.setUserRole(originUser.getUserRole());
+        safetyUser.setUserStatus(originUser.getUserStatus());
+        safetyUser.setCreateTime(originUser.getCreateTime());
+
+        return safetyUser;
+    }
+
 }
 

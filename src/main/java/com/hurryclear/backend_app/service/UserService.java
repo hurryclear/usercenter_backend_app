@@ -31,4 +31,11 @@ public interface UserService extends IService<User> {
      */
     User userLogin(String userAccount, String userPassword, HttpServletRequest request);
     // what is HttpServletRequest request?
+
+    /**
+     * get rid of the sensitive information of user
+     * @param originUser
+     * @return
+     */
+    User getSafetyUser(User originUser);
 }

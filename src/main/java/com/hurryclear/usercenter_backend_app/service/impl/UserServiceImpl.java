@@ -1,10 +1,10 @@
-package com.hurryclear.backend_app.service.impl;
+package com.hurryclear.usercenter_backend_app.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hurryclear.backend_app.model.domain.User;
-import com.hurryclear.backend_app.service.UserService;
-import com.hurryclear.backend_app.mapper.UserMapper;
+import com.hurryclear.usercenter_backend_app.model.domain.User;
+import com.hurryclear.usercenter_backend_app.service.UserService;
+import com.hurryclear.usercenter_backend_app.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +15,7 @@ import org.springframework.util.DigestUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.hurryclear.backend_app.constant.UserConstant.USER_LOGIN_STATE;
-import static net.sf.jsqlparser.util.validation.metadata.NamedObject.user;
+import static com.hurryclear.usercenter_backend_app.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
  *

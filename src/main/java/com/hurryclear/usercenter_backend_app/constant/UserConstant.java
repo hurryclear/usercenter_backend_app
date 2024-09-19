@@ -1,4 +1,4 @@
-package com.hurryclear.backend_app.constant;
+package com.hurryclear.usercenter_backend_app.constant;
 
 /**
  * user constant

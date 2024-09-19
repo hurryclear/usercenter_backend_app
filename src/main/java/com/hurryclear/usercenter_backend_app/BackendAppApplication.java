@@ -1,11 +1,11 @@
-package com.hurryclear.backend_app;
+package com.hurryclear.usercenter_backend_app;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.hurryclear.backend_app.mapper")
+@MapperScan("com.hurryclear.usercenter_backend_app.mapper")
 
 public class BackendAppApplication {
 

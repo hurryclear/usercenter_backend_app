@@ -1,6 +1,6 @@
-package com.hurryclear.backend_app.service;
+package com.hurryclear.usercenter_backend_app.service;
 
-import com.hurryclear.backend_app.model.domain.User;
+import com.hurryclear.usercenter_backend_app.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import jakarta.servlet.http.HttpServletRequest;
 

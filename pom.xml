@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hurryclear</groupId>
-    <artifactId>backend_app</artifactId>
+    <artifactId>usercenter_backend_app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>backend_app</name>
     <description>backend_app</description>

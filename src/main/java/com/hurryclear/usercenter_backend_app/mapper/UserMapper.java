@@ -1,6 +1,6 @@
-package com.hurryclear.backend_app.mapper;
+package com.hurryclear.usercenter_backend_app.mapper;
 
-import com.hurryclear.backend_app.model.domain.User;
+import com.hurryclear.usercenter_backend_app.model.domain.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -1,4 +1,4 @@
-package com.hurryclear.backend_app.model.domain;
+package com.hurryclear.usercenter_backend_app.model.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

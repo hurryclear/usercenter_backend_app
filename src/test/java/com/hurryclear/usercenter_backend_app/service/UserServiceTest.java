@@ -1,10 +1,8 @@
-package com.hurryclear.backend_app.service;
+package com.hurryclear.usercenter_backend_app.service;
 
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.hurryclear.backend_app.model.domain.User;
+import com.hurryclear.usercenter_backend_app.model.domain.User;
 import jakarta.annotation.Resource;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,9 +1,9 @@
-package com.hurryclear.backend_app.controller;
+package com.hurryclear.usercenter_backend_app.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hurryclear.backend_app.model.domain.User;
-import com.hurryclear.backend_app.model.domain.request.UserRegisterRequest;
-import com.hurryclear.backend_app.service.UserService;
+import com.hurryclear.usercenter_backend_app.model.domain.User;
+import com.hurryclear.usercenter_backend_app.model.domain.request.UserRegisterRequest;
+import com.hurryclear.usercenter_backend_app.service.UserService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.hurryclear.backend_app.constant.UserConstant.ADMIN_ROLE;
-import static com.hurryclear.backend_app.constant.UserConstant.USER_LOGIN_STATE;
+import static com.hurryclear.usercenter_backend_app.constant.UserConstant.ADMIN_ROLE;
+import static com.hurryclear.usercenter_backend_app.constant.UserConstant.USER_LOGIN_STATE;
 
 
 @RestController

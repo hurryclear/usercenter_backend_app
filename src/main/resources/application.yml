@@ -7,6 +7,8 @@ spring:
     url: jdbc:mysql://localhost:3306/hurryclear
     username: root
     password: 12345678
+  session:
+    timeout: 86400 # time limitation of a session: a day = 86400 s
 server:
   port: 8080
 

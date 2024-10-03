@@ -11,6 +11,8 @@ spring:
     timeout: 86400 # time limitation of a session: a day = 86400 s
 server:
   port: 8080
+  servlet:
+    context-path: /api
 
 mybatis-plus:
   configuration:
